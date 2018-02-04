@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('smarttrafficnodejs:server');
 var http = require('http');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/test');
+
 
 /**
  * Get port from environment and store in Express.
@@ -87,4 +90,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log('Server running at ' + port + ' !')
 }

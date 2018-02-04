@@ -1,8 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const bodyParser = require('body-parser');
 
-router.post('/push', (req, res)=>{
-    
+
+// parse application/x-www-form-urlencoded
+router.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+router.use(bodyParser.json())
+//
+router.post('/location', (req, res)=>{
+    console.log(req.body);
 })
 
 module.exports = router;
