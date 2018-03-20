@@ -10,5 +10,5 @@ var Location = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Kitten', Location);
+module.exports = mongoose.model('Location', Location);
   
