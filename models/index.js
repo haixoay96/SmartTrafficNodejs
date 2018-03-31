@@ -1,5 +1,6 @@
 const Location = require('./Location')
-
+const User = require('./User');
 module.exports = {
-    Location: Location
+    Location: Location,
+    User: User
 }
