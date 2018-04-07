@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const Location = require('../../models').Location
+const Location = require('../../models').Location;
+const Density = require('../../models').Density;
 const Config = require('../../config');
 
 // parse application/x-www-form-urlencoded
@@ -27,49 +28,34 @@ function isOnBox(box, point){
     }
     return false;
   }
-router.get('/', async(req,res)=>{
-    // let data = []
-    // for(let i = 0 ; i<=100000; i++){
-    //     data.push({
-    //         longitude: Config.topLeft.longitude + Math.random()*(Config.topRight.longitude - Config.topLeft.longitude),
-    //         latitude:Config.bottomLeft.latitude +  Math.random()*(Config.topLeft.latitude - Config.bottomLeft.latitude),
-    //         speed:1,
-    //         heading:0.3,
-    //         date: new Date()
-    //     });
-    // }
-   // Location.insertMany(data);
-    try{
-        let find = await Location.find({});
-        find = find.map((value)=>{
-            return {
-                longitude:value.longitude,
-                latitude:value.latitude,
-                date:value._id.getTimestamp()
-            }
-        })
-        let squares = Config.getSquares();
-        squares = squares.map((value, index)=>{
-            let count = 0;
-            let i = 0;
-            let length = find.length;
-            for ( i = 0 ; i <length ; i++){
-                if(isOnBox(value, find[i]) === true){
-                    count++;
-                }
-            }
-            value.count = count;
-            return value;
+router.get('/gen', async(req, res)=>{
+    let data = []
+    for(let i = 0 ; i<=10000; i++){
+        data.push({
+            longitude: Config.topLeft.longitude + Math.random()*(Config.topRight.longitude - Config.topLeft.longitude),
+            latitude:Config.bottomLeft.latitude +  Math.random()*(Config.topLeft.latitude - Config.bottomLeft.latitude),
+            speed:1,
+            heading:0.3,
+            date: new Date()
         });
+    }
+    Location.insertMany(data);
+    res.send('a')
+})
+router.get('/', async(req,res)=>{
+   
+    try{
+        let result = await Density.find().sort({_id:-1}).limit(1);
         res.json({
             status:1000,
-            squares: squares
-        })
-
+            squares: result[0].list
+        });
     }catch(e){
-        res.json(e);
-
+        res.json({
+            status:1001,
+        })
     }
+   
 })
 router.post('/', async(req, res)=>{
     console.log(req.body);
