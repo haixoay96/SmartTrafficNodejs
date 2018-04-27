@@ -16,10 +16,10 @@ var Location = mongoose.Schema({
         type:Number,
         required:true
     },
-    date:{
-        type:Date,
-        required:true
-    },
+    username: {
+        type: String,
+        require:true
+    }
     
 });
 

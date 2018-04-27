@@ -19,7 +19,7 @@ router.post('/', async(req,res)=>{
         });
         if(result){
             res.json({
-                status:1000
+                status:1000,
             })
         }else{
             res.json({

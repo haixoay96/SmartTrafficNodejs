@@ -1,14 +1,14 @@
 
 function divideSquares(){
     let point = {
-        latitude:21.157200,
-        longitude:105.456390
+        latitude:21.13032783,
+        longitude:105.7567982
     };
     let squares = [];
-    let unitLat = (21.157200 - 20.951180)/23.0;
-    let unitLng = (105.951180 - 105.456390)/56.0;
-    for ( let i = 0 ; i< 23; i++){
-        for ( let j = 0 ; j < 56 ;j++){
+    let unitLat = (21.13032783 - 20.951180)/30.0;
+    let unitLng = (105.9335089 - 105.7567982)/30.0;
+    for ( let i = 0 ; i< 30; i++){
+        for ( let j = 0 ; j < 30 ;j++){
             let topLeft = {
                 longitude:point.longitude + unitLng*j,
                 latitude:point.latitude - unitLat*i
@@ -38,23 +38,23 @@ function divideSquares(){
 }
 let squares = divideSquares();
 module.exports = {
-    deltaLatitude: 21.157200 - 20.951180,
-    deltaLongitude: 105.951180 - 105.456390,
+    deltaLatitude: 21.13032783 - 20.951180,
+    deltaLongitude: 105.9335089 - 105.7567982,
     topLeft:{
-        latitude:21.157200,
-        longitude:105.456390
+        latitude:21.13032783,
+        longitude:105.7567982
     },
     topRight:{
-        latitude:21.157200,
-        longitude:105.951180
+        latitude:21.13032783,
+        longitude:105.9335089
     },
     bottomLeft:{
         latitude:20.951180,
-        longitude:105.456390
+        longitude:105.7567982
     },
     bottomRight:{
         latitude:20.951180,
-        longitude:105.951180
+        longitude:105.9335089
     },
     getSquares: function (){
         return JSON.parse(squares);

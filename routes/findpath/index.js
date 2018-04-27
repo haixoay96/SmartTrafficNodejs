@@ -10,37 +10,37 @@ router.get('/:from/:to', async(req, res)=>{
         var map = {a:{b:0.1,c:1},b:{a:2,c:1},c:{a:4,b:1}};
         result[0].list.forEach((item, index) => {
             map[''+index] = {};
-            let check1 = (index - 56) >=0;
-            let check3 = (index+1)%56 != 0;
+            let check1 = (index - 30) >=0;
+            let check3 = (index+1)%30 != 0;
             let check2 = check1 && check3;
-            let check5 = (index + 56) <=1287;
+            let check5 = (index + 30) <=901;
             let check4 = check3 && check5;
-            let check7 = (index%56) != 0;
+            let check7 = (index%30) != 0;
             let check6 = check5 && check7;
             let check8 = check7 && check1; 
             if(check1){
-                map[''+index][''+(index-56)] = result[0].list[index-56];
+                map[''+index][''+(index-30)] = result[0].list[index-30];
             }
             if(check2){
-                map[''+index][''+(index-55)] = result[0].list[index-55];
+                map[''+index][''+(index-29)] = result[0].list[index-29];
             }
             if(check3){
                 map[''+index][''+(index+1)] =  result[0].list[index+1];
             }
             if(check4){
-                map[''+index][''+(index+57)] = result[0].list[index+57];
+                map[''+index][''+(index+31)] = result[0].list[index+31];
             }
             if(check5){
-                map[''+index][''+(index+56)] = result[0].list[index+56];
+                map[''+index][''+(index+30)] = result[0].list[index+30];
             }
             if(check6){
-                map[''+index][''+(index+55)] = result[0].list[index+55];
+                map[''+index][''+(index+29)] = result[0].list[index+29];
             }
             if(check7){
                 map[''+index][''+(index-1)] = result[0].list[index-1];
             }
             if(check8){
-                map[''+index][''+(index-57)] = result[0].list[index-57];
+                map[''+index][''+(index-31)] = result[0].list[index-31];
             }
             
         });

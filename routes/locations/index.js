@@ -61,17 +61,24 @@ router.post('/', async(req, res)=>{
     console.log(req.body);
     let longitude = req.body.longitude;
     let latitude = req.body.latitude;
+    let username = req.body.username;
+    let speed = req.body.speed;
+    let heading = req.body.heading;
     try{
         let insert = await Location.create({
             longitude: longitude,
-            latitude: latitude
+            latitude: latitude,
+            username:username,
+            speed: speed,
+            heading:heading
         });
-        console.log(e);
+        console.log(insert);
         res.json({
             status:1000
         })
     }catch(e){
         res.json(e)
+        console.error(e)
     }
 })
 
