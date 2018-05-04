@@ -13,6 +13,7 @@ var login = require('./routes/login');
 var signup = require('./routes/signup');
 var findpath = require('./routes/findpath');
 var history = require('./routes/history');
+var density = require('./routes/density');
 
 var app = express();
 
@@ -35,7 +36,9 @@ app.use('/location', location)
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/findpath', findpath);
-app.use('/history', history)
+app.use('/history', history);
+app.use('/density', density);
+
 
 
 // catch 404 and forward to error handler

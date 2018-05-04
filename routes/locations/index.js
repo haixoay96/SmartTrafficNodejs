@@ -43,6 +43,11 @@ router.get('/gen', async(req, res)=>{
     res.send('a')
 })
 router.get('/', async(req,res)=>{
+    let year = req.body.year;
+    let month = req.body.month;
+    let date = req.body.date;
+    let hour = req.body.hour;
+    let minute = req.body.minute;
    
     try{
         let result = await Density.find().sort({_id:-1}).limit(1);
