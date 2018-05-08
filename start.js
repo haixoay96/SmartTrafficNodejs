@@ -19,40 +19,64 @@ function isOnBox(box, point){
 
     let left = topLeft.longitude;
     let right = bottomRight.longitude;
-
     if( point.latitude <= top && point.latitude >= bottom && point.longitude >= left && point.longitude <= right ){
-      return true;
+        return true;
     }
+   // console.log('faalse')
     return false;
 }
  
 function calculate(){
     return new Promise(async(resolve, reject)=>{
         let find = await Location.find({});
-        console.log(find)
         find = find.map((value)=>{
             return {
                 longitude:value.longitude,
                 latitude:value.latitude,
-                date:value._id.getTimestamp()
+                date:value._id.getTimestamp(),
+                speed: value.speed
             }
         })
         let squares = Config.getSquares();
         squares = squares.map((value, index)=>{
             let count = 0;
+            let speed = 0;
             let i = 0;
             let length = find.length;
             for ( i = 0 ; i <length ; i++){
                 if(isOnBox(value, find[i]) === true){
                     count++;
+                    if(find[i].speed !== -1){
+                        console.log(find[i])
+                        speed= speed + find[i].speed
+                    }
                 }
             }
             value.count = count;
+            if(count !== 0){
+                //console.log(speed, count)
+                value.speed = speed/count;
+            }else{
+                value.speed = 0;
+            }
+            //console.log(value)
             return value;
         });
         resolve(squares)
     });
 }
+
+(async ()=>{
+    let squares = await calculate();
+    try{
+        let result = await Density.create({
+            list: squares
+        })
+        console.log('successfull!');
+    }catch(e){
+        console.log(e);
+    }
+})();
 
 
 setInterval(async()=>{
@@ -66,6 +90,6 @@ setInterval(async()=>{
     }catch(e){
         console.log(e);
     }
-}, 10000)
+}, 60000*15)
 
 

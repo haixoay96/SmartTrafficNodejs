@@ -30,13 +30,13 @@ function isOnBox(box, point){
   }
 router.get('/gen', async(req, res)=>{
     let data = []
-    for(let i = 0 ; i<=10000; i++){
+    for(let i = 0 ; i<=1000; i++){
         data.push({
             longitude: Config.topLeft.longitude + Math.random()*(Config.topRight.longitude - Config.topLeft.longitude),
             latitude:Config.bottomLeft.latitude +  Math.random()*(Config.topLeft.latitude - Config.bottomLeft.latitude),
-            speed:1,
+            speed:5 + Math.random()*40,
             heading:0.3,
-            date: new Date()
+            username: 'Duclinh'
         });
     }
     Location.insertMany(data);
