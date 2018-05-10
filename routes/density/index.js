@@ -13,6 +13,13 @@ router.post('/', async(req,res)=>{
     let hour = req.body.hour;
     let minute = req.body.minute;
 
+    increa = new Date(year,month, date, hour, minute);
+    increa.setMinutes(increa.getMinutes()+1)
+    year = increa.getFullYear();
+    month = increa.getMonth();
+    date = increa.getDate();
+    hour = increa.getHours();
+    minute = increa.getMinutes();
     let time = year + '/' + (month+1) + '/' + date + '/' + hour + ':' + minute;
     time = Math.floor((new Date(time))/1000).toString(16) + "0000000000000000";
     try{

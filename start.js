@@ -28,7 +28,15 @@ function isOnBox(box, point){
  
 function calculate(){
     return new Promise(async(resolve, reject)=>{
-        let find = await Location.find({});
+        let date = new Date();
+        date.setMinutes(date.getMinutes()-3)
+        let time = date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getHours() + ':' + date.getMinutes();
+        time = Math.floor((new Date(time))/1000).toString(16) + "0000000000000000";
+        let find = await Location.find({
+            _id:{
+                '$gte':time
+            }
+        });
         find = find.map((value)=>{
             return {
                 longitude:value.longitude,
@@ -90,6 +98,6 @@ setInterval(async()=>{
     }catch(e){
         console.log(e);
     }
-}, 60000*15)
+}, 60000*3)
 
 
