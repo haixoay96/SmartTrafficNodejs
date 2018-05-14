@@ -14,6 +14,7 @@ var signup = require('./routes/signup');
 var findpath = require('./routes/findpath');
 var history = require('./routes/history');
 var density = require('./routes/density');
+var user = require('./routes/user');
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use('/signup', signup);
 app.use('/findpath', findpath);
 app.use('/history', history);
 app.use('/density', density);
+app.use('/user', user);
 
 
 
