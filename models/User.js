@@ -11,6 +11,10 @@ var Location = mongoose.Schema({
     permission: {
         type:String, // 'member || admin'
         required:true
+    },
+    date_created:{
+        type: Date,
+        required:true
     }
 });
 

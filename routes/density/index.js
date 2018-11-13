@@ -24,8 +24,8 @@ router.post('/', async(req,res)=>{
     time = Math.floor((new Date(time))/1000).toString(16) + "0000000000000000";
     try{
         let result = await Density.find({
-            _id:{
-                '$lte': mongoose.Types.ObjectId(time)
+            date_created:{
+                '$lte': increa
             }
         }).sort({_id:-1}).limit(1);
         if(result.length <=0){

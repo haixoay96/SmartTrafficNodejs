@@ -8,7 +8,13 @@ var app = require('../app');
 var debug = require('debug')('smarttrafficnodejs:server');
 var http = require('http');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test');
+mongoose.connect('mongodb://duclinh:duclinh123@ds261253.mlab.com:61253/khoaluan', (error)=>{
+  if(error){
+    console.error('Mongo connect error!', error);
+    return;
+  }
+  console.log('Mongo connect successful!');
+});
 
 
 /**

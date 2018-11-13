@@ -19,6 +19,10 @@ var Location = mongoose.Schema({
     username: {
         type: String,
         require:true
+    },
+    date_created: {
+        type: Date,
+        required:true
     }
     
 });

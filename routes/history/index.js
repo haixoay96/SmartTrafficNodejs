@@ -7,16 +7,19 @@ router.post('/',async (req, res)=>{
     try{
         let date = new Date();
         
-        let from = date.getFullYear() + '/' + (1 + date.getMonth()) + '/' + date.getDate()
-        from = Math.floor((new Date(from))/1000).toString(16) + "0000000000000000" 
+        let from = date.getFullYear() + '/' + (1 + date.getMonth()) + '/' + date.getDate();
+        from = new Date(from)
+       // from = Math.floor((new Date(from))/1000).toString(16) + "0000000000000000" 
         date.setDate(date.getDate()+1)
         let to = date.getFullYear() + '/' + (1 + date.getMonth())+ '/' + date.getDate()
-        to = Math.floor((new Date(to))/1000).toString(16) + "0000000000000000" 
+        to = new Date(to)
+       // to = Math.floor((new Date(to))/1000).toString(16) + "0000000000000000" 
+
         let result = await Location.find({
             username: username,
-            _id:{
-                '$gt': mongoose.Types.ObjectId(from),
-                '$lt': mongoose.Types.ObjectId(to)
+            date_created:{
+                '$gt': from,
+                '$lt': to
             }
 
         })

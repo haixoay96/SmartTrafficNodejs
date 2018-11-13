@@ -17,7 +17,8 @@ router.post('/', async(req,res)=>{
         let result = await User.create({
             username:username,
             password:password,
-            permission:'member'
+            permission:'member',
+            date_created: new Date()
         });
         res.json({
             status:1000
