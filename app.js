@@ -14,6 +14,7 @@ var signup = require('./routes/signup');
 var findpath = require('./routes/findpath');
 var history = require('./routes/history');
 var density = require('./routes/density');
+var changepassword = require('./routes/changepassword');
 var user = require('./routes/user');
 
 var app = express();
@@ -39,6 +40,7 @@ app.use('/signup', signup);
 app.use('/findpath', findpath);
 app.use('/history', history);
 app.use('/density', density);
+app.use('/changepassword', changepassword);
 app.use('/user', user);
 
 
