@@ -3,6 +3,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const Location = require('../../models').Location;
 const Density = require('../../models').Density;
+const User = require('../../models').User;
 const Config = require('../../config');
 
 // parse application/x-www-form-urlencoded
@@ -29,19 +30,27 @@ function isOnBox(box, point){
     return false;
   }
 router.get('/gen', async(req, res)=>{
-    let data = []
-    for(let i = 0 ; i<=1000; i++){
-        data.push({
-            longitude: Config.topLeft.longitude + Math.random()*(Config.topRight.longitude - Config.topLeft.longitude),
-            latitude:Config.bottomLeft.latitude +  Math.random()*(Config.topLeft.latitude - Config.bottomLeft.latitude),
-            speed:5 + Math.random()*40,
-            heading:0.3,
-            username: 'Duclinh',
-            date_created: new Date()
+    try{
+        let result = await User.find({});
+        let users = result.map((value, index)=>{
+            return value.username
         });
+        let data = []
+        for(let i = 0 ; i<=1000; i++){
+            data.push({
+                longitude: Config.topLeft.longitude + Math.random()*(Config.topRight.longitude - Config.topLeft.longitude),
+                latitude:Config.bottomLeft.latitude +  Math.random()*(Config.topLeft.latitude - Config.bottomLeft.latitude),
+                speed:5 + Math.random()*40,
+                heading:Math.random(),
+                username: users[Math.floor(Math.random() * (users.length))],
+                date_created: new Date()
+            });
+        }
+        Location.insertMany(data);
+        res.send('ok');
+    }catch(e){
+        res.send('error');
     }
-    Location.insertMany(data);
-    res.send('a')
 })
 router.get('/', async(req,res)=>{
     let year = req.body.year;

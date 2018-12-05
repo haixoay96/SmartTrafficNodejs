@@ -44,7 +44,6 @@ function calculate(){
                     '$gte':date
                 }
             });
-            console.log(find.length)
             find = find.map((value)=>{
                 return {
                     longitude:value.longitude,
@@ -63,24 +62,20 @@ function calculate(){
                     if(isOnBox(value, find[i]) === true){
                         count++;
                         if(find[i].speed !== -1){
-                            console.log(find[i])
                             speed= speed + find[i].speed
                         }
                     }
                 }
                 value.count = count;
                 if(count !== 0){
-                    //console.log(speed, count)
                     value.speed = speed/count;
                 }else{
                     value.speed = 0;
                 }
-                //console.log(value)
                 return value;
             });
             resolve(squares)
         }catch(e){
-            console.log(e)
             reject(e)
         }
     });
@@ -112,6 +107,6 @@ setInterval(async()=>{
     }catch(e){
         console.log('loi',e);
     }
-}, 1000*10)
+}, 1000*60*5);
 
 

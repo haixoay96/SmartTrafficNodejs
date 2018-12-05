@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors')
+const { fork } = require('child_process');
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -62,5 +64,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+const forked = fork('start_background.js');
 
+forked.on('message', (msg) => {
+  console.log('Message from child', msg);
+});
 module.exports = app;
